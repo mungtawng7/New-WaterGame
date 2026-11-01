@@ -11,7 +11,6 @@ const timeEl = document.getElementById("time");
 const overlay = document.getElementById("overlay");
 const feedbackForm = document.getElementById("feedback-form");
 const feedbackStatus = document.getElementById("feedback-status");
-const feedbackChoice = document.getElementById("feedback-choice");
 const ovText = document.getElementById("ov-text");
 const ovButton = document.getElementById("ov-btn");
 let feedbackContext = null;
@@ -66,9 +65,6 @@ function showOverlay(title, text, btn, cls, action) {
   feedbackForm.hidden = true;
   feedbackForm.classList.add("hidden");
   feedbackForm.reset();
-  feedbackChoice.hidden = true;
-  feedbackChoice.classList.add("hidden");
-  ovButton.hidden = false;
   feedbackStatus.textContent = "";
   ovButton.textContent = btn;
   ovButton.onclick = () => { overlay.classList.add("hidden"); action(); };
@@ -80,17 +76,7 @@ function promptForFeedback(result, finalScore) {
   feedbackForm.hidden = false;
   feedbackForm.classList.remove("hidden");
   feedbackStatus.textContent = "";
-  ovButton.hidden = false;
 }
-document.getElementById("feedback-yes").addEventListener("click", () => {
-  feedbackChoice.hidden = true;
-  feedbackChoice.classList.add("hidden");
-  promptForFeedback("loss", score);
-});
-document.getElementById("feedback-no").addEventListener("click", () => {
-  overlay.classList.add("hidden");
-  init();
-});
 feedbackForm.addEventListener("submit", event => {
   event.preventDefault();
   const formData = new FormData(feedbackForm);
@@ -124,9 +110,7 @@ function endGame(won) {
   } else {
     sfx.lose();
     showOverlay("GAME OVER", `Level ${level + 1}: you didn't reach ${GOAL} in time. Score ${score}.`, "Try Again", "lose", init);
-    ovButton.hidden = true;
-    feedbackChoice.hidden = false;
-    feedbackChoice.classList.remove("hidden");
+    promptForFeedback("loss", score);
   }
 }
 const boardEl = document.getElementById("board");
