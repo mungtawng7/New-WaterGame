@@ -1,8 +1,9 @@
 const SIZE = 8;
+// Customize the goal numbers for each level here.
 const LEVELS = [
   { types: 4, moves: 25, goal: 800, time: 75 },
   { types: 5, moves: 22, goal: 1500, time: 60 },
-  { types: 6, moves: 20, goal: 2500, time: 50 },
+  { types: 6, moves: 20, goal: 2000, time: 50 },
 ];
 let TYPES = 4, GOAL = 0, level = 0, timeLeft = 0, timer = null, over = false;
 const levelEl = document.getElementById("level");

@@ -5,6 +5,55 @@ body {
   font-family: "Segoe UI", sans-serif; color: #fff; user-select: none;
 }
 main { text-align: center; padding: 12px; }
+.brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 64px;
+  max-width: calc(100vw - 32px);
+  margin: 0 0 10px;
+  padding: 10px 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.8);
+  border-radius: 999px;
+  background: linear-gradient(115deg, #0daec7 0%, #16a877 52%, #087bb8 100%);
+  box-shadow: 0 7px 20px rgba(0,0,0,.28), 0 0 0 4px rgba(255,201,7,.2), inset 0 1px 0 rgba(255,255,255,.4);
+  color: #fff;
+  text-align: left;
+}
+.brand-mark {
+  width: 25px;
+  height: 29px;
+  flex: none;
+  fill: #ffc907;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.25));
+}
+.brand-shine {
+  fill: none;
+  stroke: rgba(255,255,255,.85);
+  stroke-linecap: round;
+  stroke-width: 1.5;
+}
+.brand-copy { display: flex; flex-direction: column; }
+.brand-wordmark {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: .01em;
+}
+.brand-charity { font-weight: 700; }
+.brand-water { font-weight: 400; }
+.brand-tagline {
+  margin-top: 4px;
+  font-size: .55rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.brand-colon { color: #ffc907; }
 h1 { margin: 0 0 10px; text-shadow: 0 2px 6px rgba(0,0,0,.4); }
 .hud { display: flex; gap: 12px; justify-content: center; margin-bottom: 10px; }
 .hud div { background: rgba(0,0,0,.3); padding: 6px 14px; border-radius: 12px; }
