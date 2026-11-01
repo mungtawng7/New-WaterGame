@@ -97,6 +97,36 @@ button {
 }
 button:hover { background: #d8f1ff; }
 #mute { margin-left: 8px; }
+.countdown {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  pointer-events: none;
+}
+.countdown.hidden { display: none; }
+.countdown-number {
+  display: grid;
+  width: 112px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 2px solid rgba(255,255,255,.9);
+  border-radius: 50%;
+  background: linear-gradient(145deg, #fff 0%, #dffcff 44%, #4bbcd0 100%);
+  box-shadow: 0 10px 24px rgba(0,0,0,.28), 0 0 0 5px rgba(255,201,7,.7), inset 0 2px 6px rgba(255,255,255,.8);
+  color: #064361;
+  font-size: 4rem;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(255,255,255,.6);
+}
+.countdown-number.tick { animation: countdown-pop .8s ease-out both; }
+@keyframes countdown-pop {
+  0% { transform: scale(.82); }
+  35% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
 #overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center; z-index: 10; }
 #overlay.hidden { display: none; }
 .panel { background: #0a3d62; border: 3px solid #74d7ff; border-radius: 20px; padding: 24px 36px; box-shadow: 0 10px 40px rgba(0,0,0,.6); animation: pop-in .35s ease-out; }
@@ -105,3 +135,6 @@ button:hover { background: #d8f1ff; }
 .panel.lose h2 { color: #ff7b7b; }
 .hud strong.low { color: #ff7b7b; }
 @keyframes pop-in { from { transform: scale(.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .countdown-number.tick { animation: none; }
+}

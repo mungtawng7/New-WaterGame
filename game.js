@@ -85,6 +85,7 @@ const goalEl = document.getElementById("goal");
 const msgEl = document.getElementById("message");
 
 let grid, score, moves, selected, busy;
+let countdownRun = 0;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const rnd = () => Math.floor(Math.random() * TYPES);
 
@@ -108,20 +109,37 @@ function renderTime() {
   timeEl.classList.toggle("low", timeLeft <= 10);
 }
 
-function init() {
+async function init() {
   const L = LEVELS[level];
+  const run = ++countdownRun;
+  clearInterval(timer);
+  stopMusic();
   TYPES = L.types; GOAL = L.goal;
+  timeLeft = L.time;
   renderTime();
   do {
     grid = Array.from({ length: SIZE }, () => Array.from({ length: SIZE }, rnd));
   } while (findMatches().size || !hasMove());
-  score = 0; moves = L.moves; selected = null; busy = false; over = false;
-  timeLeft = L.time;
+  score = 0; moves = L.moves; selected = null; busy = true; over = true;
   goalEl.textContent = GOAL;
   levelEl.textContent = level + 1;
   msgEl.textContent = "Swap adjacent drops to match 3 or more.";
   render();
-  clearInterval(timer);
+  const countdown = document.getElementById("countdown");
+  countdown.classList.remove("hidden");
+  const countdownNumber = countdown.querySelector(".countdown-number");
+  for (let count = 3; count > 0; count--) {
+    if (run !== countdownRun) return;
+    countdownNumber.textContent = count;
+    countdownNumber.classList.remove("tick");
+    void countdownNumber.offsetWidth;
+    countdownNumber.classList.add("tick");
+    await sleep(800);
+  }
+  if (run !== countdownRun) return;
+  countdown.classList.add("hidden");
+  busy = false;
+  over = false;
   timer = setInterval(() => {
     if (over) return;
     timeLeft--;
